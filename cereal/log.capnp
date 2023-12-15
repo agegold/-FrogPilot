@@ -2330,6 +2330,9 @@ struct Event {
     customReservedRawData1 @125 :Data;
     customReservedRawData2 @126 :Data;
 
+    # NDA neokii
+    naviData @127 :NaviData;
+
     # *********** Custom: reserved for forks ***********
     frogpilotCarControl @107 :Custom.FrogPilotCarControl;
     frogpilotDeviceState @108 :Custom.FrogPilotDeviceState;
@@ -2382,4 +2385,20 @@ struct Event {
     sensorEventsDEPRECATED @11 :List(SensorEventData);
     lateralPlanDEPRECATED @64 :LateralPlan;
   }
+}
+struct NaviData {
+    active @0 :Int16;
+    roadLimitSpeed @1 :Int16;
+    isHighway @2 :Bool;
+    camType @3 :Int16;
+    camLimitSpeedLeftDist @4 :Int16;
+    camLimitSpeed @5 :Int16;
+    sectionLimitSpeed @6 :Int16;
+    sectionLeftDist @7 :Int16;
+    sectionAvgSpeed @8 :Int16;
+    sectionLeftTime @9 :Int16;
+    sectionAdjustSpeed @10 :Bool;
+    camSpeedFactor @11 :Float32;
+    currentRoadName @12 :Text;
+    isNda2 @13 :Bool;
 }
