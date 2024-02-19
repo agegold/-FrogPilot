@@ -439,7 +439,7 @@ UIState::UIState(QObject *parent) : QObject(parent) {
     "modelV2", "controlsState", "liveCalibration", "radarState", "deviceState",
     "pandaStates", "carParams", "driverMonitoringState", "carState", "liveLocationKalman", "driverStateV2",
     "wideRoadCameraState", "managerState", "navInstruction", "navRoute", "uiPlan",
-    "frogpilotCarControl", "frogpilotDeviceState", "frogpilotPlan", "naviData",
+    "frogpilotCarControl", "frogpilotDeviceState", "frogpilotPlan", "naviData", "carControl",
   });
 
   Params params;
@@ -480,7 +480,6 @@ void UIState::update() {
   scene.conditional_status = scene.conditional_experimental ? paramsMemory.getInt("CEStatus") : 0;
   scene.current_holiday_theme = scene.holiday_themes ? paramsMemory.getInt("CurrentHolidayTheme") : 0;
   scene.current_random_event = scene.random_events ? paramsMemory.getInt("CurrentRandomEvent") : 0;
-  scene.traffic_mode_active = scene.conditional_experimental && scene.enabled && paramsMemory.getBool("TrafficModeActive");
 }
 
 void UIState::setPrimeType(PrimeType type) {

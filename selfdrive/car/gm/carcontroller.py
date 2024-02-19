@@ -65,7 +65,6 @@ class CarController:
 
     return pedal_gas
 
-
   def update(self, CC, CS, now_nanos, frogpilot_variables):
     actuators = CC.actuators
     accel = actuators.accel
@@ -113,6 +112,13 @@ class CarController:
 
     if self.CP.openpilotLongitudinalControl:
       # Gas/regen, brakes, and UI commands - all at 25Hz
+      # regen paddle
+      if CC.longActive and actuators.accel < -0.3:
+        can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
+        actuators.regenPaddle = True  # for icon
+      else:
+        actuators.regenPaddle = False  # for icon
+
       if self.frame % 4 == 0:
         stopping = actuators.longControlState == LongCtrlState.stopping
         at_full_stop = CC.longActive and CS.out.standstill
