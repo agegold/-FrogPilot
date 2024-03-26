@@ -369,7 +369,7 @@ class CarInterface(CarInterfaceBase):
         ret.longitudinalTuning.kpV = [0.15, 0.21]
         ret.longitudinalTuning.kiBP = [0., 35.0]
         ret.longitudinalTuning.kiV = [0.01, 0.01]
-        ret.longitudinalTuning.kf = 0.15
+        ret.longitudinalTuning.kf = 0.20
         ret.stoppingDecelRate = 0.8
       else:  # Pedal used for SNG, ACC for longitudinal control otherwise
         ret.safetyConfigs[0].safetyParam |= Panda.FLAG_GM_HW_CAM_LONG
