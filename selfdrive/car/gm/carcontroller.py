@@ -114,6 +114,9 @@ class CarController:
       # Gas/regen, brakes, and UI commands - all at 25Hz
       # regen paddle
       if CC.longActive and actuators.accel < -0.3:
+        interceptor_gas_cmd = 0
+        idx = (self.frame // 4) % 4
+        can_sends.append(create_gas_interceptor_command(self.packer_pt, interceptor_gas_cmd, idx))
         can_sends.append(gmcan.create_regen_paddle_command(self.packer_pt, CanBus.POWERTRAIN))
         actuators.regenPaddle = True  # for icon
       else:
