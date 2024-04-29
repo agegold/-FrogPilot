@@ -1099,7 +1099,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
       "UwU u went a bit fast there!",
       "(⁄ ⁄•⁄ω⁄•⁄ ⁄)",
       AlertStatus.frogpilot, AlertSize.mid,
-      Priority.LOW, VisualAlert.none, AudibleAlert.uwu, 4.),
+      Priority.LOW, VisualAlert.none, AudibleAlert.none, 4.),
   },
 
   EventName.accel35: {
@@ -1107,7 +1107,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
       "I ain't giving you no tree-fiddy",
       "you damn Loch Ness monsta!",
       AlertStatus.frogpilot, AlertSize.mid,
-      Priority.LOW, VisualAlert.none, AudibleAlert.nessie, 4.),
+      Priority.LOW, VisualAlert.none, AudibleAlert.none, 4.),
   },
 
   EventName.firefoxSteerSaturated: {
