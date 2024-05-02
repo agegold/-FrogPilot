@@ -227,4 +227,7 @@ def create_regen_paddle_command(packer, bus):
   values = {
     "RegenPaddle": 0x2,
   }
-  return packer.make_can_msg("EBCMRegenPaddle", bus, values)
+  return packer.make_can_msg("EBCMRegenPaddle", 0, values)
+# def _user_regen_msg(self, regen):
+#   values = {"RegenPaddle": 2 if regen else 0}
+#   return self.packer.make_can_msg_panda("EBCMRegenPaddle", 0, values)
