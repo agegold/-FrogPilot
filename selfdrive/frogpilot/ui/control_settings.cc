@@ -5,8 +5,8 @@ FrogPilotControlsPanel::FrogPilotControlsPanel(SettingsWindow *parent) : FrogPil
     {"AdjustablePersonalities", "Adjustable Personalities", "Use the 'Distance' button on the steering wheel or the onroad UI to switch between openpilot's driving personalities.\n\n1 bar = Aggressive\n2 bars = Standard\n3 bars = Relaxed", "../frogpilot/assets/toggle_icons/icon_distance.png"},
 
     {"AlwaysOnLateral", "상시 핸들 조향", "브레이크 또는 가속 페달을 사용할때 오픈파일럿은 항상 핸들 조향을 합니다.\n\n핸들조향을 끌때는 크루즈 버튼을 사용하세요.", "../frogpilot/assets/toggle_icons/icon_always_on_lateral.png"},
-    {"AlwaysOnLateralMain", "Enable On Cruise Main", "Enable 'Always On Lateral' by simply turning on 'Cruise Control'.", ""},
-    {"HideAOLStatusBar", "Hide the Status Bar", "Don't use the status bar for 'Always On Lateral'.", ""},
+    {"AlwaysOnLateralMain", "크루즈 컨트롤 사용", "크루즈 컨트롤 키면 항상 핸들조향이 됩니다.", ""},
+    {"HideAOLStatusBar", "상태 표시줄 숨기기", "상시 핸들 조향시 상태바를 사용 사용하지 마세요.", ""},
 
     {"ConditionalExperimental", "Conditional Experimental Mode", "Automatically switches to 'Experimental Mode' under predefined conditions.", "../frogpilot/assets/toggle_icons/icon_conditional.png"},
     {"CECurves", "Curve Detected Ahead", "Switch to 'Experimental Mode' when a curve is detected.", ""},
