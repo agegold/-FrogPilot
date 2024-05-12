@@ -257,7 +257,7 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   addItem(translateBtn);
 
   // Delete driving footage button
-  auto deleteFootageBtn = new ButtonControl(tr("Delete Driving Data"), tr("DELETE"), tr("This button provides a swift and secure way to permanently delete all "
+  auto deleteFootageBtn = new ButtonControl(tr("주행기록 삭제"), tr("삭제"), tr("This button provides a swift and secure way to permanently delete all "
     "stored driving footage and data from your device. Ideal for maintaining privacy or freeing up space.")
   );
   connect(deleteFootageBtn, &ButtonControl::clicked, [=]() {
