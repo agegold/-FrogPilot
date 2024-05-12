@@ -47,7 +47,7 @@ FrogPilotControlsPanel::FrogPilotControlsPanel(SettingsWindow *parent) : FrogPil
 
     {"Model", "모델 선택기", "선호하는 오픈파일럿 모델을 선택하세요.", "../assets/offroad/icon_calibration.png"},
 
-    {"MTSCEnabled", "도 회전 속도 제어", "다운로드한 지도에서 감지된 예상 곡선에 맞춰 속도를 줄이세요.", "../frogpilot/assets/toggle_icons/icon_speed_map.png"},
+    {"MTSCEnabled", "지도 회전 속도 제어", "다운로드한 지도에서 감지된 예상 곡선에 맞춰 속도를 줄이세요.", "../frogpilot/assets/toggle_icons/icon_speed_map.png"},
     {"DisableMTSCSmoothing", "MTSC UI 스무딩 비활성화", "onroad UI에서 요청된 속도에 대한 스무딩을 비활성화합니다.", ""},
     {"MTSCCurvatureCheck", "모델 곡률 감지 안전 장치", "모델이 도로의 곡선을 감지한 경우에만 MTSC를 트리거합니다. 순전히 거짓 긍정을 방지하기 위한 안전 장치로만 사용됩니다. 거짓 긍정을 경험하지 않는 경우 이 기능을 끄십시오.", ""},
     {"MTSCLimit", "Speed Change Hard Cap", "MTSC에 대한 하드 캡을 설정합니다. MTSC가 이 값보다 큰 속도 감소를 요청하면 MTSC에서 요청한 속도를 무시합니다. 오탐을 방지하기 위한 안전 장치로만 사용됩니다. 그대로 둡니다. 오탐지가 발생하지 않으면 이 기능을 끄세요.", ""},
