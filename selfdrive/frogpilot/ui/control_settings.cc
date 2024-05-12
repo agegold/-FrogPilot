@@ -4,7 +4,7 @@ FrogPilotControlsPanel::FrogPilotControlsPanel(SettingsWindow *parent) : FrogPil
   const std::vector<std::tuple<QString, QString, QString, QString>> controlToggles {
     {"AdjustablePersonalities", "Adjustable Personalities", "Use the 'Distance' button on the steering wheel or the onroad UI to switch between openpilot's driving personalities.\n\n1 bar = Aggressive\n2 bars = Standard\n3 bars = Relaxed", "../frogpilot/assets/toggle_icons/icon_distance.png"},
 
-    {"AlwaysOnLateral", "Always on Lateral", "Maintain openpilot lateral control when the brake or gas pedals are used.\n\nDeactivation occurs only through the 'Cruise Control' button.", "../frogpilot/assets/toggle_icons/icon_always_on_lateral.png"},
+    {"AlwaysOnLateral", "상시 핸들 조향", "브레이크 또는 가속 페달을 사용할때 오픈파일럿은 항상 핸들 조향을 합니다.\n\n핸들조향을 끌때는 크루즈 버튼을 사용하세요.", "../frogpilot/assets/toggle_icons/icon_always_on_lateral.png"},
     {"AlwaysOnLateralMain", "Enable On Cruise Main", "Enable 'Always On Lateral' by simply turning on 'Cruise Control'.", ""},
     {"HideAOLStatusBar", "Hide the Status Bar", "Don't use the status bar for 'Always On Lateral'.", ""},
 
