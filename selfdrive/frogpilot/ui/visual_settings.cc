@@ -14,7 +14,7 @@ FrogPilotVisualsPanel::FrogPilotVisualsPanel(SettingsWindow *parent) : FrogPilot
     {"EngageVolume", "작동 볼륨", "관련 경고:\n\nNNFF 토크 컨트롤러 로드됨", ""},
     {"PromptVolume", "프롬프트 볼륨", "관련 경고:\n\n사각지대에서 차량이 감지됨\n신호등이 녹색으로 바뀌었습니다\n속도가 너무 낮습니다\n'X' 이하에서는 조향을 사용할 수 없습니다\n조종권을 확보하고 조향 한계를 초과합니다.", ""},
     {"PromptDistractedVolume", "신속한 산만한 볼륨", "관련 경고:\n\n주의, 운전자 주의 분산\n핸들 터치, 운전자 무반응", ""},
-    {"RefuseVolume", "거부 볼륨", "관련 경고:\in\openpilot 사용할 수 없음", ""},
+    {"RefuseVolume", "거부 볼륨", "관련 경고:\n\nopenpilot 사용할 수 없음", ""},
     {"WarningSoftVolume", "경고 소프트 볼륨", "관련 경고:\n\n브레이크!, 충돌 위험\n즉시 제어하십시오", ""},
     {"WarningImmediateVolume", "즉시 볼륨 경고", "관련 경고:\n\n즉시 해제, 운전자 주의가 산만해짐\n즉시 해제, 운전자 응답 없음", ""},
 
