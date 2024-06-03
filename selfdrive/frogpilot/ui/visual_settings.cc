@@ -36,7 +36,7 @@ FrogPilotVisualsPanel::FrogPilotVisualsPanel(SettingsWindow *parent) : FrogPilot
     {"PedalsOnUI", "누르고 있는 페달", "핸들 아이콘 아래 온로드 UI에 어떤 페달을 밟고 있는지 표시합니다.", ""},
     {"RoadNameUI", "도로 이름", "화면 하단에서 현재 도로 이름을 확인하세요. 출처는 OpenStreetMap입니다.", ""},
 
-    {"DriverCamera", "Driver Camera On Reverse", "Show the driver's camera feed when you shift to reverse.", "../assets/img_driver_face_static.png"},
+    {"DriverCamera", "후진 시 운전가 카메라", "후진 기어로 변속할 때 운전자 카메라를 보여줍니다.", "../assets/img_driver_face_static.png"},
 
     {"ModelUI", "모델 UI", "모델의 시각화가 화면에 표시되는 방식을 개인화하세요.", "../assets/offroad/icon_calibration.png"},
     {"DynamicPathWidth", "동적 경로 너비", "openpilot의 현재 참여 상태에 따라 경로 너비를 동적으로 조정합니다.", ""},
