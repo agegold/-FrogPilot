@@ -271,11 +271,11 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   addItem(deleteFootageBtn);
 
   // Delete long term toggle storage button
-  auto deleteStorageParamsBtn = new ButtonControl(tr("Delete Toggle Storage Data"), tr("DELETE"), tr("This button provides a swift and secure way to permanently delete all "
-    "long term stored toggle settings. Ideal for maintaining privacy or freeing up space.")
+  auto deleteStorageParamsBtn = new ButtonControl(tr("스토리지 데이터 삭제 토글"), tr("삭제"), tr("이 버튼을 사용하면 모든 항목을 영구적으로 빠르고 안전하게 삭제할 수 있습니다. "
+    "장기간 저장된 토글 설정. 프라이버시 유지 또는 공간 확보에 이상적입니다.")
   );
   connect(deleteStorageParamsBtn, &ButtonControl::clicked, [=]() {
-    if (!ConfirmationDialog::confirm(tr("Are you sure you want to permanently delete all of your long term toggle settings storage?"), tr("Delete"), this)) return;
+    if (!ConfirmationDialog::confirm(tr("장기 토글 설정 저장소를 모두 영구적으로 삭제하시겠습니까?"), tr("삭제"), this)) return;
     std::thread([&] {
       deleteStorageParamsBtn->setValue("Deleting params...");
       std::system("rm -rf /persist/comma/params");
@@ -285,14 +285,14 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   addItem(deleteStorageParamsBtn);
 
   // Backup FrogPilot
-  std::vector<QString> frogpilotBackupOptions{tr("Backup"), tr("Delete"), tr("Restore")};
-  FrogPilotButtonsControl *frogpilotBackup = new FrogPilotButtonsControl("FrogPilot Backups", "Backup, delete, or restore your FrogPilot backups.", "", frogpilotBackupOptions);
+  std::vector<QString> frogpilotBackupOptions{tr("저장"), tr("삭제"), tr("복구")};
+  FrogPilotButtonsControl *frogpilotBackup = new FrogPilotButtonsControl("FrogPilot 백업", "FrogPilot 백업을 백업, 삭제 또는 복원합니다.", "", frogpilotBackupOptions);
 
   connect(frogpilotBackup, &FrogPilotButtonsControl::buttonClicked, [=](int id) {
     QDir backupDir("/data/backups");
 
     if (id == 0) {
-      QString nameSelection = InputDialog::getText(tr("Name your backup"), this, "", false, 1);
+      QString nameSelection = InputDialog::getText(tr("저장 이름"), this, "", false, 1);
       if (!nameSelection.isEmpty()) {
         std::thread([=]() {
           frogpilotBackup->setValue("Backing up...");
@@ -306,13 +306,13 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 
           int result = std::system(command.c_str());
           if (result == 0) {
-            std::cout << "Backup successful to " << fullBackupPath << std::endl;
-            frogpilotBackup->setValue("Success!");
+            std::cout << "저장 성공" << fullBackupPath << std::endl;
+            frogpilotBackup->setValue("성공!");
             std::this_thread::sleep_for(std::chrono::seconds(3));
             frogpilotBackup->setValue("");
           } else {
-            std::cerr << "Backup failed with error code: " << result << std::endl;
-            frogpilotBackup->setValue("Failed...");
+            std::cerr << "저장 실패 에러 코드: " << result << std::endl;
+            frogpilotBackup->setValue("실패...");
             std::this_thread::sleep_for(std::chrono::seconds(3));
             frogpilotBackup->setValue("");
           }
@@ -321,16 +321,16 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
     } else if (id == 1) {
       QStringList backupNames = backupDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
-      QString selection = MultiOptionDialog::getSelection(tr("Select a backup to delete"), backupNames, "", this);
+      QString selection = MultiOptionDialog::getSelection(tr("삭제할 저장을 선택"), backupNames, "", this);
       if (!selection.isEmpty()) {
-        if (!ConfirmationDialog::confirm(tr("Are you sure you want to delete this backup?"), tr("Delete"), this)) return;
+        if (!ConfirmationDialog::confirm(tr("이 저장을 삭제하시겠습니까?"), tr("삭제"), this)) return;
         std::thread([=]() {
-          frogpilotBackup->setValue("Deleting...");
+          frogpilotBackup->setValue("삭제...");
           QDir dirToDelete(backupDir.absoluteFilePath(selection));
           if (dirToDelete.removeRecursively()) {
-            frogpilotBackup->setValue("Deleted!");
+            frogpilotBackup->setValue("삭제!");
           } else {
-            frogpilotBackup->setValue("Failed...");
+            frogpilotBackup->setValue("실패...");
           }
           std::this_thread::sleep_for(std::chrono::seconds(3));
           frogpilotBackup->setValue("");
@@ -339,9 +339,9 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
     } else {
       QStringList backupNames = backupDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
-      QString selection = MultiOptionDialog::getSelection(tr("Select a restore point"), backupNames, "", this);
+      QString selection = MultiOptionDialog::getSelection(tr("복구 포인트를 선택하세요"), backupNames, "", this);
       if (!selection.isEmpty()) {
-        if (!ConfirmationDialog::confirm(tr("Are you sure you want to restore this version of FrogPilot?"), tr("Restore"), this)) return;
+        if (!ConfirmationDialog::confirm(tr("FrogPilot의 이 버전을 복원하시겠습니까?"), tr("복구"), this)) return;
         std::thread([=]() {
           frogpilotBackup->setValue("Restoring...");
 
@@ -355,20 +355,20 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
           int result = std::system(command.c_str());
 
           if (result == 0) {
-            std::cout << "Restore successful from " << sourcePath << " to " << targetPath << std::endl;
+            std::cout << "복구 성공" << sourcePath << " to " << targetPath << std::endl;
             std::ofstream consistentFile(consistentFilePath);
             if (consistentFile) {
               consistentFile.close();
               std::cout << ".overlay_consistent file created successfully." << std::endl;
             } else {
               std::cerr << "Failed to create .overlay_consistent file." << std::endl;
-              frogpilotBackup->setValue("Failed...");
+              frogpilotBackup->setValue("실패...");
               std::this_thread::sleep_for(std::chrono::seconds(3));
               frogpilotBackup->setValue("");
             }
             Hardware::reboot();
           } else {
-            std::cerr << "Restore failed with error code: " << result << std::endl;
+            std::cerr << "복원에 실패했습니다. 오류 코드: " << result << std::endl;
           }
         }).detach();
       }
@@ -377,17 +377,17 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   addItem(frogpilotBackup);
 
   // Backup toggles
-  std::vector<QString> toggleBackupOptions{tr("Backup"), tr("Delete"), tr("Restore")};
-  FrogPilotButtonsControl *toggleBackup = new FrogPilotButtonsControl("Toggle Backups", "Backup, delete, or restore your toggle backups.", "", toggleBackupOptions);
+  std::vector<QString> toggleBackupOptions{tr("저장"), tr("삭제"), tr("복구")};
+  FrogPilotButtonsControl *toggleBackup = new FrogPilotButtonsControl("토글 저장", "토글 백업을 백업, 삭제 또는 복원합니다.", "", toggleBackupOptions);
 
   connect(toggleBackup, &FrogPilotButtonsControl::buttonClicked, [=](int id) {
     QDir backupDir("/data/toggle_backups");
 
     if (id == 0) {
-      QString nameSelection = InputDialog::getText(tr("Name your backup"), this, "", false, 1);
+      QString nameSelection = InputDialog::getText(tr("저장 이름 지정"), this, "", false, 1);
       if (!nameSelection.isEmpty()) {
         std::thread([=]() {
-          toggleBackup->setValue("Backing up...");
+          toggleBackup->setValue("저장 중...");
 
           std::string fullBackupPath = backupDir.absolutePath().toStdString() + "/" + nameSelection.toStdString() + "/";
 
@@ -403,8 +403,8 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
             std::this_thread::sleep_for(std::chrono::seconds(3));
             toggleBackup->setValue("");
           } else {
-            std::cerr << "Backup failed with error code: " << result << std::endl;
-            toggleBackup->setValue("Failed...");
+            std::cerr << "저장 실패 오류 코드: " << result << std::endl;
+            toggleBackup->setValue("실패...");
             std::this_thread::sleep_for(std::chrono::seconds(3));
             toggleBackup->setValue("");
           }
@@ -415,14 +415,14 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 
       QString selection = MultiOptionDialog::getSelection(tr("Select a backup to delete"), backupNames, "", this);
       if (!selection.isEmpty()) {
-        if (!ConfirmationDialog::confirm(tr("Are you sure you want to delete this backup?"), tr("Delete"), this)) return;
+        if (!ConfirmationDialog::confirm(tr("이 백업을 삭제하시겠습니까?"), tr("Delete"), this)) return;
         std::thread([=]() {
-          toggleBackup->setValue("Deleting...");
+          toggleBackup->setValue("삭제 중...");
           QDir dirToDelete(backupDir.absoluteFilePath(selection));
           if (dirToDelete.removeRecursively()) {
-            toggleBackup->setValue("Deleted!");
+            toggleBackup->setValue("삭제!");
           } else {
-            toggleBackup->setValue("Failed...");
+            toggleBackup->setValue("실패...");
           }
           std::this_thread::sleep_for(std::chrono::seconds(3));
           toggleBackup->setValue("");
@@ -433,7 +433,7 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 
       QString selection = MultiOptionDialog::getSelection(tr("Select a restore point"), backupNames, "", this);
       if (!selection.isEmpty()) {
-        if (!ConfirmationDialog::confirm(tr("Are you sure you want to restore this toggle backup?"), tr("Restore"), this)) return;
+        if (!ConfirmationDialog::confirm(tr("이 토글 백업을 복원하시겠습니까?"), tr("Restore"), this)) return;
         std::thread([=]() {
           toggleBackup->setValue("Restoring...");
 
@@ -448,14 +448,14 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 
           if (result == 0) {
             std::cout << "Restore successful from " << sourcePath << " to " << targetPath << std::endl;
-            toggleBackup->setValue("Success!");
+            toggleBackup->setValue("성공!");
             paramsMemory.putBool("FrogPilotTogglesUpdated", true);
             std::this_thread::sleep_for(std::chrono::seconds(3));
             toggleBackup->setValue("");
             paramsMemory.putBool("FrogPilotTogglesUpdated", false);
           } else {
             std::cerr << "Restore failed with error code: " << result << std::endl;
-            toggleBackup->setValue("Failed...");
+            toggleBackup->setValue("실패...");
             std::this_thread::sleep_for(std::chrono::seconds(3));
             toggleBackup->setValue("");
           }
@@ -466,9 +466,9 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   addItem(toggleBackup);
 
   // Panda flashing button
-  auto flashPandaBtn = new ButtonControl(tr("Flash Panda"), tr("FLASH"), "Use this button to troubleshoot and update the Panda device's firmware.");
+  auto flashPandaBtn = new ButtonControl(tr("판다 플래시"), tr("플래시"), "이 버튼을 사용하여 Panda 장치의 펌웨어 문제를 해결하고 업데이트합니다.");
   connect(flashPandaBtn, &ButtonControl::clicked, [this]() {
-    if (!ConfirmationDialog::confirm(tr("Are you sure you want to flash the Panda?"), tr("Flash"), this)) return;
+    if (!ConfirmationDialog::confirm(tr("판다를 플래시하시겠습니까?"), tr("플래시"), this)) return;
     QProcess process;
     // Get Panda type
     SubMaster &sm = *(uiState()->sm);
@@ -502,17 +502,17 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   QHBoxLayout *power_layout = new QHBoxLayout();
   power_layout->setSpacing(30);
 
-  QPushButton *reboot_btn = new QPushButton(tr("Reboot"));
+  QPushButton *reboot_btn = new QPushButton(tr("재부팅"));
   reboot_btn->setObjectName("reboot_btn");
   power_layout->addWidget(reboot_btn);
   QObject::connect(reboot_btn, &QPushButton::clicked, this, &DevicePanel::reboot);
 
-  QPushButton *softreboot_btn = new QPushButton(tr("Soft Reboot"));
+  QPushButton *softreboot_btn = new QPushButton(tr("소프트 재부팅"));
   softreboot_btn->setObjectName("softreboot_btn");
   power_layout->addWidget(softreboot_btn);
   QObject::connect(softreboot_btn, &QPushButton::clicked, this, &DevicePanel::softreboot);
 
-  QPushButton *poweroff_btn = new QPushButton(tr("Power Off"));
+  QPushButton *poweroff_btn = new QPushButton(tr("전원 종료"));
   poweroff_btn->setObjectName("poweroff_btn");
   power_layout->addWidget(poweroff_btn);
   QObject::connect(poweroff_btn, &QPushButton::clicked, this, &DevicePanel::poweroff);
@@ -534,8 +534,8 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 
 void DevicePanel::updateCalibDescription() {
   QString desc =
-      tr("openpilot requires the device to be mounted within 4° left or right and "
-         "within 5° up or 9° down. openpilot is continuously calibrating, resetting is rarely required.");
+      tr("openpilot은 장치를 좌우 4° 이내, "
+        "위로 5° 또는 아래로 9° 이내로 장착해야 합니다. openpilot은 지속적으로 교정되므로 재설정이 거의 필요하지 않습니다.");
   std::string calib_bytes = params.get("CalibrationParams");
   if (!calib_bytes.empty()) {
     try {
@@ -545,9 +545,9 @@ void DevicePanel::updateCalibDescription() {
       if (calib.getCalStatus() != cereal::LiveCalibrationData::Status::UNCALIBRATED) {
         double pitch = calib.getRpyCalib()[1] * (180 / M_PI);
         double yaw = calib.getRpyCalib()[2] * (180 / M_PI);
-        desc += tr(" Your device is pointed %1° %2 and %3° %4.")
-                    .arg(QString::number(std::abs(pitch), 'g', 1), pitch > 0 ? tr("down") : tr("up"),
-                         QString::number(std::abs(yaw), 'g', 1), yaw > 0 ? tr("left") : tr("right"));
+        desc += tr(" \n장치가 %1° %2 그리고 %3° %4 위치해 있습니다.")
+                    .arg(QString::number(std::abs(pitch), 'g', 1), pitch > 0 ? "위로" : "아래로",
+                         QString::number(std::abs(yaw), 'g', 1), yaw > 0 ? "오른쪽으로" : "왼쪽으로");
       }
     } catch (kj::Exception) {
       qInfo() << "invalid CalibrationParams";
@@ -558,7 +558,7 @@ void DevicePanel::updateCalibDescription() {
 
 void DevicePanel::reboot() {
   if (!uiState()->engaged()) {
-    if (ConfirmationDialog::confirm(tr("Are you sure you want to reboot?"), tr("Reboot"), this)) {
+    if (ConfirmationDialog::confirm(tr("재부팅을 하시겠습니까?"), tr("재부팅"), this)) {
       // Check engaged again in case it changed while the dialog was open
       if (!uiState()->engaged()) {
         params.putBool("DoReboot", true);
@@ -571,7 +571,7 @@ void DevicePanel::reboot() {
 
 void DevicePanel::softreboot() {
   if (!uiState()->engaged()) {
-    if (ConfirmationDialog::confirm(tr("Are you sure you want to soft reboot?"), tr("Soft Reboot"), this)) {
+    if (ConfirmationDialog::confirm(tr("소프트 재부팅을 하시겠습니까?"), tr("소프트 재부팅"), this)) {
       if (!uiState()->engaged()) {
         params.putBool("DoSoftReboot", true);
       }
@@ -583,7 +583,7 @@ void DevicePanel::softreboot() {
 
 void DevicePanel::poweroff() {
   if (!uiState()->engaged()) {
-    if (ConfirmationDialog::confirm(tr("Are you sure you want to power off?"), tr("Power Off"), this)) {
+    if (ConfirmationDialog::confirm(tr("전원을 종료 하시겠습니까?"), tr("전원 종료"), this)) {
       // Check engaged again in case it changed while the dialog was open
       if (!uiState()->engaged()) {
         params.putBool("DoShutdown", true);
