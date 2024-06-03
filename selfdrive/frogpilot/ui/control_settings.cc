@@ -2,7 +2,7 @@
 
 FrogPilotControlsPanel::FrogPilotControlsPanel(SettingsWindow *parent) : FrogPilotListWidget(parent) {
   const std::vector<std::tuple<QString, QString, QString, QString>> controlToggles {
-    {"AdjustablePersonalities", "조정가능한 운전 스타일", "스티어링 휠이나 온로드 UI의 '거리' 버튼을 사용하여 openpilot의 운전 스타일을 전환합니다.\n\n1개 막대 = 공격적\n2개 막대 = 표준\n3개 막대 = 느긋함", "../frogpilot/assets/toggle_icons/icon_distance.png"},
+    {"AdjustablePersonalities", "조정가능한 운전 스타일", "스티어링 휠이나 온로드 UI의 '거리' 버튼을 사용하여 openpilot의 운전 스타일을 전환합니다.\n\n막대 1개 = 공격적\n막대 2개 = 표준\n막대 3개 = 느긋함", "../frogpilot/assets/toggle_icons/icon_distance.png"},
 
     {"AlwaysOnLateral", "상시 핸들 조향", "브레이크 또는 가속 페달을 사용할때 오픈파일럿은 항상 핸들 조향을 합니다.\n\n핸들조향을 끌때는 크루즈 버튼을 사용하세요.", "../frogpilot/assets/toggle_icons/icon_always_on_lateral.png"},
     {"AlwaysOnLateralMain", "크루즈 컨트롤 사용", "크루즈 컨트롤 키면 항상 핸들조향이 됩니다.", ""},
