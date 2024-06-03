@@ -64,7 +64,7 @@ QStringList getCarNames(const QString &carMake) {
 }
 
 FrogPilotVehiclesPanel::FrogPilotVehiclesPanel(SettingsWindow *parent) : FrogPilotListWidget(parent) {
-  selectMakeButton = new ButtonControl(tr("Select Make"), tr("SELECT"));
+  selectMakeButton = new ButtonControl(tr("차량 회사 선택"), tr("선택"));
   QObject::connect(selectMakeButton, &ButtonControl::clicked, [this]() {
     QStringList makes = {
       "Acura", "Audi", "BMW", "Buick", "Cadillac", "Chevrolet", "Chrysler", "Dodge", "Ford", "GM", "GMC",
@@ -82,7 +82,7 @@ FrogPilotVehiclesPanel::FrogPilotVehiclesPanel(SettingsWindow *parent) : FrogPil
   });
   addItem(selectMakeButton);
 
-  selectModelButton = new ButtonControl(tr("Select Model"), tr("SELECT"));
+  selectModelButton = new ButtonControl(tr("모델 선택"), tr("선택"));
   QString modelSelection = QString::fromStdString(params.get("CarModel"));
   QObject::connect(selectModelButton, &ButtonControl::clicked, [this]() {
     QString newModelSelection = MultiOptionDialog::getSelection(tr("Select a Model"), models, "", this);
@@ -95,10 +95,10 @@ FrogPilotVehiclesPanel::FrogPilotVehiclesPanel(SettingsWindow *parent) : FrogPil
   addItem(selectModelButton);
   selectModelButton->setVisible(false);
 
-  ParamControl *forceFingerprint = new ParamControl("ForceFingerprint", "Disable Automatic Fingerprint Detection", "Forces the selected fingerprint and prevents it from ever changing.", "", this);
+  ParamControl *forceFingerprint = new ParamControl("ForceFingerprint", "자동 핑거프린트 감지 비활성화", "선택한 핑거프린트를 강제로 변경하지 못하게 합니다.", "", this);
   addItem(forceFingerprint);
 
-  ParamControl *disableOpenpilotLong = new ParamControl("DisableOpenpilotLongitudinal", "Disable Openpilot Longitudinal Control", "Disables openpilot longitudinal control to use stock ACC.", "", this);
+  ParamControl *disableOpenpilotLong = new ParamControl("DisableOpenpilotLongitudinal", "Openpilot 종방향 제어 비활성화", "기본 ACC를 사용하기 위해 Openpilot 종방향 제어를 비활성화합니다.", "", this);
   addItem(disableOpenpilotLong);
 
   QObject::connect(disableOpenpilotLong, &ToggleControl::toggleFlipped, [=]() {
