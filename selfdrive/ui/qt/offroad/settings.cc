@@ -668,10 +668,10 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
     {tr("Network"), new Networking(this)},
     {tr("Toggles"), toggles},
     {tr("Software"), new SoftwarePanel(this)},
-    {tr("Controls"), frogpilotControls},
-    {tr("Navigation"), new FrogPilotNavigationPanel(this)},
-    {tr("Vehicles"), new FrogPilotVehiclesPanel(this)},
-    {tr("Visuals"), frogpilotVisuals},
+    {tr("컨트롤"), frogpilotControls},
+    {tr("네비게이션"), new FrogPilotNavigationPanel(this)},
+    {tr("차량"), new FrogPilotVehiclesPanel(this)},
+    {tr("화면"), frogpilotVisuals},
   };
 
   nav_btns = new QButtonGroup(this);
